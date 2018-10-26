@@ -23,5 +23,5 @@ Rules for the gameplay are mentioned below -
 
 
 Note:  
-    1. The game is endless and only ends when snake dies. 
-    2. The frequency of tokens, bricks, walls is open to programmer's implementation, but should make the game challenging for the player.
+1. The game is endless and only ends when snake dies. 
+2. The frequency of tokens, bricks, walls is open to programmer's implementation, but should make the game challenging for the player.
