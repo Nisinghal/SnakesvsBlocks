@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="480.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.playScreenController">
+   <children>
+      <ImageView fitHeight="480.0" fitWidth="800.0" layoutX="-160.0" layoutY="160.0" rotate="-90.0">
+         <image>
+            <Image url="@../images/5139158680789.560c17cbe6d72.jpg" />
+         </image>
+      </ImageView>
+      <Text fx:id="_currentScore" fill="WHITE" layoutX="19.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+         <font>
+            <Font name="Century Gothic Bold" size="40.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="89.0" fitWidth="60.0" layoutX="411.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/dollar.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="_currentCoins" fill="WHITE" layoutX="355.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="13">
+         <font>
+            <Font name="Century Gothic Bold" size="40.0" />
+         </font>
+      </Text>
+      <AnchorPane layoutY="70.0" onKeyReleased="#keyReleased" prefHeight="700.0" prefWidth="480.0">
+         <children>
+            <Circle fx:id="_snakeHead" fill="#fce1ea" layoutX="240.0" layoutY="660.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            <Rectangle fx:id="_block1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+            <Rectangle fx:id="_block2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="320.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+            <Rectangle fx:id="_block3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="240.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+            <Rectangle fx:id="_block4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="160.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+            <Rectangle fx:id="_block5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="80.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+            <Rectangle fx:id="_block6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="400.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+            <Line fx:id="_wall1" endX="-39.57942199707031" endY="291.3333435058594" layoutX="279.0" layoutY="157.0" startX="-39.579463958740234" startY="-13.685440063476562" stroke="#2f2b2b" strokeWidth="7.0" />
+            <Line fx:id="_wall2" endX="-39.5794677734375" endY="191.0673828125" layoutX="122.0" layoutY="346.0" startX="-39.579437255859375" startY="-202.3333282470703" stroke="#2f2b2b" strokeWidth="7.0" />
+            <Text fx:id="_block1value" fill="WHITE" layoutX="30.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+               <font>
+                  <Font name="Century Gothic" size="40.0" />
+               </font>
+            </Text>
+            <Text fx:id="_block2value" fill="WHITE" layoutX="270.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+               <font>
+                  <Font name="Century Gothic" size="40.0" />
+               </font>
+            </Text>
+            <Text fx:id="_block3value" fill="WHITE" layoutX="100.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="23">
+               <font>
+                  <Font name="Century Gothic" size="40.0" />
+               </font>
+            </Text>
+            <Text fx:id="_block4value" fill="#fcfafa" layoutX="340.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12">
+               <font>
+                  <Font name="Century Gothic" size="40.0" />
+               </font>
+            </Text>
+            <Text fx:id="_block5value" fill="#f8f8f8" layoutX="420.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="18">
+               <font>
+                  <Font name="Century Gothic" size="40.0" />
+               </font>
+            </Text>
+            <Text fx:id="_block6value" fill="#f5f4f4" layoutX="180.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10">
+               <font>
+                  <Font name="Century Gothic" size="40.0" />
+               </font>
+            </Text>
+            <Button layoutX="442.0" layoutY="648.0" mnemonicParsing="false" opacity="0.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
