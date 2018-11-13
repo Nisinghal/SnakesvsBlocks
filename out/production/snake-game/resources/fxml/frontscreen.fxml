@@ -30,7 +30,7 @@
             <Font name="Century Gothic Bold" size="96.0" />
         </font>
     </Text>
-    <Button fx:id="_startButton" cacheShape="false" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" layoutY="464.0" mnemonicParsing="false" onAction="#tapToStart" prefHeight="337.0" prefWidth="480.0" style="-fx-background-color: black;" text="Tap to Start" textFill="#807f7f" textOverrun="CENTER_ELLIPSIS">
+    <Button fx:id="_startButton" cacheShape="false" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" layoutY="464.0" mnemonicParsing="false" onAction="#tapToStart" prefHeight="168.0" prefWidth="480.0" style="-fx-background-color: black;" text="Tap to Start" textFill="#807f7f" textOverrun="CENTER_ELLIPSIS">
         <font>
             <Font name="Century Gothic" size="48.0" />
         </font>
@@ -45,11 +45,16 @@
             <Font name="Century Gothic" size="29.0" />
         </font>
     </Text>
-    <Button fx:id="_leaderboard" cacheShape="false" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" layoutX="154.0" layoutY="402.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="174.0" style="-fx-background-color: black;" text="Leaderboard" textFill="#f8f8f8" textOverrun="CENTER_ELLIPSIS">
+    <Button fx:id="_leaderboard" cacheShape="false" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" layoutX="154.0" layoutY="402.0" mnemonicParsing="false" onAction="#goLeader" prefHeight="69.0" prefWidth="174.0" style="-fx-background-color: black;" text="Leaderboard" textFill="#f8f8f8" textOverrun="CENTER_ELLIPSIS">
         <font>
             <Font size="24.0" />
         </font>
     </Button>
+         <Button fx:id="_resume" cacheShape="false" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" layoutY="632.0" mnemonicParsing="false" onAction="#tapToStart" prefHeight="168.0" prefWidth="480.0" style="-fx-background-color: black;" text="Resume" textFill="#807f7f" textOverrun="CENTER_ELLIPSIS">
+            <font>
+               <Font name="Century Gothic" size="48.0" />
+            </font>
+         </Button>
 </children>
 </AnchorPane>
    <columnConstraints>

@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -17,63 +21,95 @@
             <Image url="@../images/5139158680789.560c17cbe6d72.jpg" />
          </image>
       </ImageView>
-      <Text fx:id="_currentScore" fill="WHITE" layoutX="19.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-         <font>
-            <Font name="Century Gothic Bold" size="40.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="89.0" fitWidth="60.0" layoutX="411.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/dollar.png" />
-         </image>
-      </ImageView>
-      <Text fx:id="_currentCoins" fill="WHITE" layoutX="355.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="13">
-         <font>
-            <Font name="Century Gothic Bold" size="40.0" />
-         </font>
-      </Text>
       <AnchorPane layoutY="70.0" onKeyReleased="#keyReleased" prefHeight="700.0" prefWidth="480.0">
          <children>
-            <Circle fx:id="_snakeHead" fill="#fce1ea" layoutX="240.0" layoutY="660.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Rectangle fx:id="_block1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-            <Rectangle fx:id="_block2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="320.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-            <Rectangle fx:id="_block3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="240.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-            <Rectangle fx:id="_block4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="160.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-            <Rectangle fx:id="_block5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="80.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-            <Rectangle fx:id="_block6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" layoutX="400.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-            <Line fx:id="_wall1" endX="-39.57942199707031" endY="291.3333435058594" layoutX="279.0" layoutY="157.0" startX="-39.579463958740234" startY="-13.685440063476562" stroke="#2f2b2b" strokeWidth="7.0" />
-            <Line fx:id="_wall2" endX="-39.5794677734375" endY="191.0673828125" layoutX="122.0" layoutY="346.0" startX="-39.579437255859375" startY="-202.3333282470703" stroke="#2f2b2b" strokeWidth="7.0" />
-            <Text fx:id="_block1value" fill="WHITE" layoutX="30.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
-               <font>
-                  <Font name="Century Gothic" size="40.0" />
-               </font>
-            </Text>
-            <Text fx:id="_block2value" fill="WHITE" layoutX="270.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
-               <font>
-                  <Font name="Century Gothic" size="40.0" />
-               </font>
-            </Text>
-            <Text fx:id="_block3value" fill="WHITE" layoutX="100.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="23">
-               <font>
-                  <Font name="Century Gothic" size="40.0" />
-               </font>
-            </Text>
-            <Text fx:id="_block4value" fill="#fcfafa" layoutX="340.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12">
-               <font>
-                  <Font name="Century Gothic" size="40.0" />
-               </font>
-            </Text>
-            <Text fx:id="_block5value" fill="#f8f8f8" layoutX="420.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="18">
-               <font>
-                  <Font name="Century Gothic" size="40.0" />
-               </font>
-            </Text>
-            <Text fx:id="_block6value" fill="#f5f4f4" layoutX="180.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10">
-               <font>
-                  <Font name="Century Gothic" size="40.0" />
-               </font>
-            </Text>
             <Button layoutX="442.0" layoutY="648.0" mnemonicParsing="false" opacity="0.0" />
+            <AnchorPane fx:id="_blockPane" prefHeight="700.0" prefWidth="480.0">
+               <children>
+                  <Text fx:id="_snakeLength" layoutX="154.0" layoutY="461.0" strokeType="OUTSIDE" strokeWidth="0.0" text="13" textAlignment="CENTER" wrappingWidth="90.99999922513962">
+                     <font>
+                        <Font name="Century Gothic Bold" size="22.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="_snakeHead" layoutX="180.0" layoutY="460.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" style="-fx-background-color: ffdce7; -fx-background-radius: 20; -fx-border-color: BLACK; -fx-border-radius: 20; -fx-border-width: 2px;" />
+                  <Label fx:id="_snakeHead1" layoutX="180.0" layoutY="500.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" style="-fx-background-color: ffdce7; -fx-background-radius: 20; -fx-border-color: BLACK; -fx-border-radius: 20; -fx-border-width: 2px;" />
+                  <Label fx:id="_snakeHead11" layoutX="180.0" layoutY="540.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" style="-fx-background-color: ffdce7; -fx-background-radius: 20; -fx-border-color: BLACK; -fx-border-radius: 20; -fx-border-width: 2px;" />
+                  <AnchorPane fx:id="_gameOver" layoutX="14.0" layoutY="68.0" mouseTransparent="true" opacity="0.9" prefHeight="518.0" prefWidth="449.0" style="-fx-background-color: turquoise; -fx-background-radius: 20px; -fx-border-color: white; -fx-border-radius: 19px;" visible="false">
+                     <children>
+                        <Label fx:id="_endScore" alignment="TOP_CENTER" layoutX="78.0" layoutY="76.0" prefHeight="231.0" prefWidth="293.0" style="-fx-background-color: #09495a; -fx-background-radius: 10px; -fx-label-padding: 20px;" text="Label" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="Century Gothic Bold" size="57.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="_topScore" layoutX="204.0" layoutY="204.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Century Gothic Bold" size="48.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Blend />
+                           </effect>
+                        </Label>
+                        <ImageView fitHeight="63.0" fitWidth="68.0" layoutX="121.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/crown.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Button layoutX="103.0" layoutY="413.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="249.0" style="-fx-background-color: white; -fx-background-radius: 9px;" text="One More Life" textFill="#09495a">
+                           <font>
+                              <Font name="Century Gothic Bold" size="30.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="104.0" prefWidth="480.0">
+         <children>
+            <Text fx:id="_currentScore" fill="WHITE" layoutX="14.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+               <font>
+                  <Font name="Century Gothic Bold" size="40.0" />
+               </font>
+            </Text>
+            <Text fx:id="_currentCoins" fill="WHITE" layoutX="356.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="13">
+               <font>
+                  <Font name="Century Gothic Bold" size="40.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="89.0" fitWidth="60.0" layoutX="409.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/diamondcoin.png" />
+               </image>
+            </ImageView>
+            <MenuBar accessibleHelp="frfvd" accessibleText="dhackjad" blendMode="OVERLAY" layoutX="-4.0" layoutY="-4.0" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: WHITE;">
+              <menus>
+                <Menu mnemonicParsing="false" text="II">
+                  <items>
+                    <MenuItem fx:id="_restart" mnemonicParsing="false" onAction="#tapToStart" text="Restart Game" />
+                        <MenuItem fx:id="_exit" mnemonicParsing="false" onAction="#backHome" text="Exit to Main Menu" />
+                  </items>
+                </Menu>
+              </menus>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Blend />
+               </effect>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </MenuBar>
          </children>
       </AnchorPane>
    </children>
