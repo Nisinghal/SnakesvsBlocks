@@ -15,7 +15,7 @@ public class Main extends Application {
         mainStage=primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("../resources/fxml/frontscreen.fxml"));
         primaryStage.setTitle("Snake VS Blocks");
-        primaryStage.setScene(new Scene(root, 480, 800));
+        primaryStage.setScene(new Scene(root, 320, 480));
         primaryStage.show();
     }
 

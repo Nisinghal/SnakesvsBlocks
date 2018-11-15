@@ -14,26 +14,26 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="480.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.playScreenController">
+<AnchorPane maxHeight="480.0" maxWidth="320.0" minHeight="480.0" minWidth="320.0" prefHeight="480.0" prefWidth="320.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.playScreenController">
    <children>
-      <ImageView fitHeight="480.0" fitWidth="800.0" layoutX="-160.0" layoutY="160.0" rotate="-90.0">
+      <ImageView fitHeight="320.0" fitWidth="480.0" layoutX="-80.0" layoutY="81.0" rotate="90.0">
          <image>
             <Image url="@../images/5139158680789.560c17cbe6d72.jpg" />
          </image>
       </ImageView>
-      <AnchorPane layoutY="70.0" onKeyReleased="#keyReleased" prefHeight="700.0" prefWidth="480.0">
+      <AnchorPane layoutY="-7.0" maxHeight="480.0" maxWidth="320.0" minHeight="480.0" minWidth="320.0" onKeyReleased="#keyReleased" prefHeight="480.0" prefWidth="320.0">
          <children>
             <Button layoutX="442.0" layoutY="648.0" mnemonicParsing="false" opacity="0.0" />
-            <AnchorPane fx:id="_blockPane" prefHeight="700.0" prefWidth="480.0">
+            <AnchorPane fx:id="_blockPane" layoutY="9.0" maxHeight="480.0" maxWidth="320.0" minHeight="480.0" minWidth="320.0" prefHeight="480.0" prefWidth="320.0">
                <children>
-                  <Text fx:id="_snakeLength" layoutX="154.0" layoutY="461.0" strokeType="OUTSIDE" strokeWidth="0.0" text="13" textAlignment="CENTER" wrappingWidth="90.99999922513962">
+                  <Text fx:id="_snakeLength" layoutX="84.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="13" textAlignment="CENTER" wrappingWidth="90.99999922513962">
                      <font>
-                        <Font name="Century Gothic Bold" size="22.0" />
+                        <Font name="Century Gothic Bold" size="14.0" />
                      </font>
                   </Text>
-                  <Label fx:id="_snakeHead" layoutX="180.0" layoutY="460.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" style="-fx-background-color: ffdce7; -fx-background-radius: 20; -fx-border-color: BLACK; -fx-border-radius: 20; -fx-border-width: 2px;" />
-                  <Label fx:id="_snakeHead1" layoutX="180.0" layoutY="500.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" style="-fx-background-color: ffdce7; -fx-background-radius: 20; -fx-border-color: BLACK; -fx-border-radius: 20; -fx-border-width: 2px;" />
-                  <Label fx:id="_snakeHead11" layoutX="180.0" layoutY="540.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" style="-fx-background-color: ffdce7; -fx-background-radius: 20; -fx-border-color: BLACK; -fx-border-radius: 20; -fx-border-width: 2px;" />
+                  <Label fx:id="_snakeHead" disable="true" layoutX="120.0" layoutY="300.0" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: ffdce7; -fx-background-radius: 20; -fx-border-color: BLACK; -fx-border-radius: 20; -fx-border-width: 2px;" visible="false" />
+                  <Label fx:id="_snakeHead1" disable="true" layoutX="120.0" layoutY="320.0" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: ffdce7; -fx-background-radius: 20; -fx-border-color: BLACK; -fx-border-radius: 20; -fx-border-width: 2px;" visible="false" />
+                  <Label fx:id="_snakeHead11" disable="true" layoutX="120.0" layoutY="340.0" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: ffdce7; -fx-background-radius: 20; -fx-border-color: BLACK; -fx-border-radius: 20; -fx-border-width: 2px;" visible="false" />
                   <AnchorPane fx:id="_gameOver" layoutX="14.0" layoutY="68.0" mouseTransparent="true" opacity="0.9" prefHeight="518.0" prefWidth="449.0" style="-fx-background-color: turquoise; -fx-background-radius: 20px; -fx-border-color: white; -fx-border-radius: 19px;" visible="false">
                      <children>
                         <Label fx:id="_endScore" alignment="TOP_CENTER" layoutX="78.0" layoutY="76.0" prefHeight="231.0" prefWidth="293.0" style="-fx-background-color: #09495a; -fx-background-radius: 10px; -fx-label-padding: 20px;" text="Label" textAlignment="CENTER" textFill="WHITE">
@@ -74,23 +74,28 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="104.0" prefWidth="480.0">
+      <ImageView fitHeight="48.0" fitWidth="51.0" layoutX="265.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/diamondcoin.png" />
+         </image>
+      </ImageView>
+      <AnchorPane prefHeight="104.0" prefWidth="320.0">
          <children>
-            <Text fx:id="_currentScore" fill="WHITE" layoutX="14.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+            <Text fx:id="_currentScore" fill="WHITE" layoutX="7.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                <font>
-                  <Font name="Century Gothic Bold" size="40.0" />
+                  <Font name="Century Gothic Bold" size="30.0" />
                </font>
             </Text>
-            <Text fx:id="_currentCoins" fill="WHITE" layoutX="356.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="13">
+            <Text fx:id="_currentCoins" fill="WHITE" layoutX="230.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="13">
                <font>
-                  <Font name="Century Gothic Bold" size="40.0" />
+                  <Font name="Century Gothic Bold" size="30.0" />
                </font>
             </Text>
-            <ImageView fitHeight="89.0" fitWidth="60.0" layoutX="409.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/diamondcoin.png" />
-               </image>
-            </ImageView>
+            <Text fx:id="_magnetTimer" fill="WHITE" layoutX="41.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="187.59765625">
+               <font>
+                  <Font name="Century Gothic Bold" size="24.0" />
+               </font>
+            </Text>
             <MenuBar accessibleHelp="frfvd" accessibleText="dhackjad" blendMode="OVERLAY" layoutX="-4.0" layoutY="-4.0" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: WHITE;">
               <menus>
                 <Menu mnemonicParsing="false" text="II">
@@ -110,6 +115,11 @@
                   <Insets />
                </opaqueInsets>
             </MenuBar>
+            <Text fx:id="_shieldTimer" fill="WHITE" layoutX="41.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="187.59765625">
+               <font>
+                  <Font name="Century Gothic Bold" size="24.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </children>
