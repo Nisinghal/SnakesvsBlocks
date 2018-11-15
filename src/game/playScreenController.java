@@ -46,13 +46,13 @@ public class playScreenController<timer> {
     @FXML
     private AnchorPane _gameOver;
     @FXML
-    private Text _currentCoins;
+    Text _currentCoins;
     @FXML
     Label _endScore;
     @FXML
     Label _topScore;
     @FXML
-    private Text _currentScore;
+    private  Text _currentScore;
     @FXML
     Text _magnetTimer;
     @FXML
@@ -142,7 +142,7 @@ public class playScreenController<timer> {
                         final int no=tokeno;
                         if (tokeno == 1) _token= new Magnet( mag, xsi, xs, _blockPane);
                         else if (tokeno == 2) _token = new DestroyAllBlocks(destroy, xsi, xs, _blockPane);
-                        else if (tokeno == 3) _token= new Coin(coin, xsi, xs, _blockPane);
+                        else if (tokeno == 3) _token= new Coin(coin, xsi, xs, _blockPane, _currentCoins);
                         else if (tokeno == 4) _token = new Shield(magic, xsi, xs, _blockPane);
                         else  _token = new Ball(rand, xsi, xs, _blockPane);
 
@@ -157,6 +157,7 @@ public class playScreenController<timer> {
                                     if (_token.checkCollision(_snake)) {
                                        if(no==3) _token.collide(_snake, _blockPane, _currentCoins);
                                        else if(no==1) _token.collide(_snake, _blockPane, _magnetTimer);
+                                       else if (no==2) _token.collide(_snake,_blockPane, _currentScore);
                                        else _token.collide(_snake, _blockPane, _shieldTimer);
                                         this.stop();
                                     }
@@ -173,8 +174,6 @@ public class playScreenController<timer> {
         };
         timerx2.start();
     }
-
-
 
 //    public void spawnToken(int tokeno, Image tok, int xsi) {
 //        ImageView _token = new ImageView();

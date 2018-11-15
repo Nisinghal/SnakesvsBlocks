@@ -9,15 +9,19 @@ public class Coin implements Token {
     int value;
     int frequency;
     ImageView _coin;
+    static Image _coinImage;
+    static Text _currentCoins;
 
-    Coin(Image tok, int xsi, double[] xs, AnchorPane _blockPane) {
+    Coin(Image tok, int xsi, double[] xs, AnchorPane _blockPane, Text _cc) {
         _coin = new ImageView();
         _coin.setImage(tok);
+        _coinImage=_coin.getImage();
         _coin.setFitHeight(60);
         _coin.setFitWidth(60);
         _coin.setLayoutX(xs[xsi]);
         _coin.setLayoutY(-52.5);
         _blockPane.getChildren().add(_coin);
+        _currentCoins=_cc;
     }
 
     public boolean checkCollision(Snake _snake) {
@@ -32,12 +36,21 @@ public class Coin implements Token {
         _blockPane.getChildren().remove(_coin);
     }
 
-    public double getLayoutY(){
+    public double getLayoutY() {
         return _coin.getLayoutY();
     }
+
     public void collide(Snake _snake, AnchorPane _blockPane, Text _currentCoins) {
+        if (_snake.checkMagnetOn()) System.out.println("MAGNETTcoin");
         disappear(_blockPane);
-        _currentCoins.setText("" + (Integer.parseInt(_currentCoins.getText()) + 1));
+        setCurrentCoins(getCurrentCoins() + 1);
         _blockPane.getChildren().remove(_coin);
+    }
+    static public void setCurrentCoins(int coin){
+        _currentCoins.setText(""+coin);
+    }
+
+    static public int getCurrentCoins(){
+        return Integer.parseInt(_currentCoins.getText());
     }
 }

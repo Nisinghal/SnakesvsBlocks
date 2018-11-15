@@ -64,7 +64,6 @@ public class Shield implements Token {
                         _value--;
                         if (_value <= 0) {
                             _snake._shield = false;
-
                             _currentCoins.setVisible(false);
                             _currentCoins.setDisable(true);
                             this.stop();

@@ -19,6 +19,7 @@ public class Block {
         Random rand = new Random();
         int hex = assignHex(rand, value);
         _block.setTextAlignment(TextAlignment.CENTER);
+        if(hex>12) hex=12;
         _block.setStyle("-fx-background-color:" + hexcodes[hex] + "; -fx-background-radius: 4px; -fx-border-color: BLACK; -fx-border-width: 2px; -fx-font-family:'CENTURY GOTHIC'; -fx-font-size: 30; -fx-text-fill: WHITE;  -fx-alignment: CENTER;  -fx-border-radius: 4px");
         _block.setText(String.valueOf(value));
         _block.setMinSize(52.5, 52.5);

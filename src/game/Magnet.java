@@ -1,6 +1,9 @@
 package game;
 
 import javafx.animation.AnimationTimer;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -39,43 +42,62 @@ public class Magnet implements Token {
         return _magnet.getLayoutY();
     }
 
-    public void collide(Snake _snake, AnchorPane _blockPane, Text _currentCoins) {
+    public void collide(Snake _snake, AnchorPane _blockPane, Text _text) {
         disappear(_blockPane);
         _snake._magnet = true;
         _value = 10;
 
-        _currentCoins.setDisable(false);
-        _currentCoins.setVisible(true);
-        _currentCoins.setText("Magnet On: 10");
+        _text.setDisable(false);
+        _text.setVisible(true);
+        _text.setText("Magnet On: 10");
 
         AnimationTimer timer = new AnimationTimer() {
             private long lastUpdate = 0;
 
             @Override
             public void handle(long now) {
-                for (Object _node : _blockPane.getChildren()) {
-                    if (_node instanceof Coin) {
-                        Coin node = (Coin) _node;
-                        node.collide(_snake, _blockPane, _currentCoins);
-                    } else if (_node instanceof Ball) {
-                        Ball node = (Ball) _node;
-                        node.collide(_snake, _blockPane, _currentCoins);
+                    ObservableList<Node> nodes = _blockPane.getChildren();
+                    for (int i = 0; i < nodes.size(); i++) {
+                        if (nodes.get(i).getClass().toString().equals("class javafx.scene.control.Label")) {
+                            Label _node= (Label) nodes.get(i);
+                            String[] _nodecss = _node.getStyle().split("; ");
+                            if (_nodecss[1].equals("-fx-background-radius: 20px") && _nodecss[4].equals("-fx-border-radius: 20px")==false) {
+//                                _node.collide(_snake, _blockPane, _currentCoins);
+                                System.out.println("ballremoved");
+//                                if(_node.getLayoutY()>= 230 || _node.getLayoutY()<= 320)
+                                _snake._incLength(Integer.parseInt(_node.getText()), _blockPane);
+                                _blockPane.getChildren().remove(_node);
+                            }
+                        }
+                        else if (nodes.get(i).getClass().toString().equals("class javafx.scene.image.ImageView")) {
+                            ImageView _node= (ImageView) nodes.get(i);
+                            if (_node.getImage().equals(Coin._coinImage)){
+//                                _node.collide(_snake, _blockPane, _currentCoins);
+                                System.out.println("coinremoved");
+//                                if(_node.getLayoutY()>= 200 || _node.getLayoutY()<= 320){
+                                    Coin.setCurrentCoins(Coin.getCurrentCoins() + 1);
+                                    _blockPane.getChildren().remove(_node);
+//                                }
+                            }
+                        }
                     }
+                    nodes =null;
+
                     if (now - lastUpdate >= 1000_000_000l) {
                         lastUpdate = now;
-                        _currentCoins.setText("Magnet On: " + _value);
+                        _text.setText("Magnet On: " + _value);
                         _value--;
                         if (_value <= 0) {
                             _snake._magnet = false;
-                            _currentCoins.setVisible(false);
-                            _currentCoins.setDisable(true);
+                            _text.setVisible(false);
+                            _text.setDisable(true);
                             this.stop();
                         }
                     }
 
                 }
 
-            }
+
         };
         timer.start();
     }

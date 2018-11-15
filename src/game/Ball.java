@@ -14,7 +14,7 @@ public class Ball implements Token {
 
     Ball(AnchorPane _blockPane) {
         _ball = new Label();
-        _ball.setStyle("-fx-background-color: WHITE; -fx-background-radius: 20px; -fx-border-color: BLACK; -fx-border-width: 2px; -fx-font-family:'CENTURY GOTHIC'; -fx-font-size: 14; -fx-text-fill: BLACK;  -fx-alignment: CENTER; -fx-font-weight: bold; -fx-border-radius: 20px");
+        _ball.setStyle("-fx-background-color: WHITE; -fx-background-radius: 20px; -fx-border-color: BLACK; -fx-border-width: 2px; -fx-border-radius: 20px");
         _ball.setMinSize(20, 20);
         _ball.setMaxSize(20, 20);
         _ball.setPrefSize(20, 20);
@@ -64,13 +64,14 @@ public class Ball implements Token {
     }
 
     public void collide(Snake _snake, AnchorPane _blockPane, Text _currentCoins) {
+        if(_snake.checkMagnetOn()) System.out.println("MAGNETTball");
 //        Random rand = new Random();
         int sl = Integer.parseInt(_snake._snakeLength.getText());
         disappear(_blockPane);
         _snake._incLength(_value, _blockPane);
 ////        _ball.setLayoutX(_snake._snakeTailX);
 ////        _ball.setLayoutY(_snake._snakeTailY);
-        _snake._snakeLength.setText("" + (sl + _value));
+//        _snake._snakeLength.setText("" + (sl + _value));
 ////        _ball.setText("");
 ////        _snake._snakeTailY = _snake._snakeTailY + 20;
 ////        _snake._snake.add(_ball);

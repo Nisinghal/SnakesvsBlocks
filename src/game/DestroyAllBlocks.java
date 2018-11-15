@@ -4,6 +4,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 
 public class DestroyAllBlocks implements Token {
     int value;
@@ -26,7 +29,7 @@ public class DestroyAllBlocks implements Token {
         return (_snake._snakeHead.getLayoutX() >= _destroyAll.getLayoutX() && _snake._snakeHead.getLayoutX() <= _destroyAll.getLayoutX() + 52.5 && 240 <= _destroyAll.getLayoutY() && 310 >= _destroyAll.getLayoutY());
     }
 
-    public double getLayoutY(){
+    public double getLayoutY() {
         return _destroyAll.getLayoutY();
     }
 
@@ -40,10 +43,24 @@ public class DestroyAllBlocks implements Token {
 
     public void collide(Snake _snake, AnchorPane _blockPane, Text _currentCoins) {
         disappear(_blockPane);
-        for (Object _node : _blockPane.getChildren()) {
-            if (_node instanceof Block) _blockPane.getChildren().remove(_node);
+//        System.out.println(_blockPane.getChildren().size());
+        ObservableList<Node> nodes = _blockPane.getChildren();
+        for (int i = 0; i < nodes.size(); i++) {
+            if (nodes.get(i).getClass().toString().equals("class javafx.scene.control.Label")) {
+                Label _node= (Label) nodes.get(i);
+//                System.out.println(_node.getStyle());
+                String[] _nodecss = _node.getStyle().split("; ");
+            if (_nodecss[1].equals("-fx-background-radius: 4px")) {
+//                System.out.println("Removed"+_node.getText());
+                _currentCoins.setText("" + (Integer.parseInt(_currentCoins.getText()) + Integer.parseInt(_node.getText())));
+                _blockPane.getChildren().remove(nodes.get(i));
+            }
+            }
         }
-
-
-    }
+    nodes =null;
 }
+}
+
+
+
+

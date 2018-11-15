@@ -39,7 +39,7 @@ public class Snake {
     }
 
     public void _decLength(Block _block, int value, AnchorPane _blockPane) {
-        System.out.println("collide"+value);
+//        System.out.println("collide"+value);
 
         int sl = Integer.parseInt(_snakeLength.getText());
         while (_snake.size() > (sl - value) && _snake.size() > 0) {
@@ -63,7 +63,7 @@ public class Snake {
     public void _incLength(int increment, AnchorPane _blockPane) {
         for(int i=0;i<increment;i++){
             Ball _new = new Ball(_blockPane);
-            System.out.println(_snakeTailY+ " "+_snake.size()+" "+_snakeLength.getText());
+//            System.out.println(_snakeTailY+ " "+_snake.size()+" "+_snakeLength.getText());
             _new.setLayoutX(_snakeTailX);
             _new.setLayoutY(_snakeTailY);
             _new.extendSnake(this);
