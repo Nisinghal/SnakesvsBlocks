@@ -10,15 +10,38 @@ import java.util.Random;
 //import java.util.Timer;
 //import java.util.TimerTask;
 
+/**
+ * The Class Block.
+ */
 public class Block {
 
+    /** The block. */
     Label _block;
+    
+    /** The value. */
     int _value;
+    
+    /** The frequency. */
     int frequency;
+    
+    /** The color. */
     String color;
+    
+    /** The hexcodes. */
     static String[] hexcodes = {"#CFF", "#CCC", "#9CF", "#99F", "#99C", "#39C", "#36C", "#63C", "#93C", "#936", "#C33", "#C03", "#C00"};
+    
+    /** The hex. */
     static int hex;
 
+    /**
+     * Instantiates a new block.
+     *
+     * @param _blocks the blocks
+     * @param _blockPane the block pane
+     * @param value the value
+     * @param xs the xs
+     * @param xsi the xsi
+     */
     Block(ArrayList<Block> _blocks, AnchorPane _blockPane, int value, double[] xs, int xsi) {
         _block = new Label();
         Random rand = new Random();
@@ -37,6 +60,11 @@ public class Block {
         _blocks.add(this);
     }
 
+    /**
+     * Assign hex.
+     *
+     * @return the int
+     */
     public int assignHex() {
 
         return ((_value) / 4);
@@ -44,14 +72,29 @@ public class Block {
     }
 
 
+    /**
+     * Check collision.
+     *
+     * @param _snake the snake
+     * @return true, if successful
+     */
     public boolean checkCollision(Snake _snake) {
 //            System.out.println(_snake._snakeHead.getLayoutX()+" "+_block.getLayoutX());
         return (_snake._snakeHead.getLayoutX() >= _block.getLayoutX() && _snake._snakeHead.getLayoutX() <= _block.getLayoutX() + 52.5 && 240 <= _block.getLayoutY() && 310 >= _block.getLayoutY());
     }
 
-    public void collide(AnchorPane _blockPane, Snake _snake, Text _currentScore, ArrayList<Block> _blocks) {
+    /**
+     * Collide.
+     *
+     * @param _blockPane the block pane
+     * @param _snake the snake
+     * @param _currentScore the current score
+     * @param _blocks the blocks
+     * @throws Exception the exception
+     */
+    public void collide(AnchorPane _blockPane, Snake _snake, Text _currentScore, ArrayList<Block> _blocks) throws Exception {
         if (_block.isDisabled() != true) {
-            if (_snake.checkShieldOff()) _snake._decLength(this, _value, _blockPane);
+            if (_snake.checkShieldOff()) _snake._decLength(this, _value, _blockPane, _currentScore.getText());
             _currentScore.setText("" + (Integer.parseInt(_currentScore.getText()) + _value));
             Burst _burst = new Burst(_blockPane, _block.getLayoutX(), _block.getLayoutY(), hex, hexcodes);
 
@@ -60,6 +103,13 @@ public class Block {
         _blockPane.getChildren().remove(_block);
     }
 
+    /**
+     * Collide.
+     *
+     * @param _blockPane the block pane
+     * @param _snake the snake
+     * @param _currentScore the current score
+     */
     public void collide(AnchorPane _blockPane, Snake _snake, Text _currentScore) {
         _currentScore.setText("" + (Integer.parseInt(_currentScore.getText()) + _value));
         _blockPane.getChildren().remove(_block);
@@ -67,10 +117,19 @@ public class Block {
         _blockPane.getChildren().remove(_block);
     }
 
+    /**
+     * Proceed.
+     */
     public void proceed() {
         _block.setLayoutY(_block.getLayoutY() + 3);
     }
 
+    /**
+     * Disappear.
+     *
+     * @param _blockPane the block pane
+     * @param _blocks the blocks
+     */
     public void disappear(AnchorPane _blockPane, ArrayList<Block> _blocks) {
         AnimationTimer timer2 = new AnimationTimer() {
             private long lastUpdate2 = 0;

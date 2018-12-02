@@ -82,7 +82,7 @@
       </AnchorPane>
       <ImageView fitHeight="48.0" fitWidth="51.0" layoutX="265.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../snake-game/src/resources/images/diamondcoin.png" />
+            <Image url="@../images/diamondcoin.png" />
          </image>
       </ImageView>
       <AnchorPane prefHeight="104.0" prefWidth="320.0">
@@ -106,6 +106,7 @@
               <menus>
                 <Menu mnemonicParsing="false" text="II">
                   <items>
+                        <MenuItem fx:id="_save" mnemonicParsing="false" onAction="#saveGame" text="Save Game" />
                     <MenuItem fx:id="_restart" mnemonicParsing="false" onAction="#tapToStart" text="Restart Game" />
                         <MenuItem fx:id="_exit" mnemonicParsing="false" onAction="#backHome" text="Exit to Main Menu" />
                   </items>

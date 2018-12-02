@@ -21,57 +21,117 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * The Class playScreenController.
+ *
+ * @param <timer> the generic type
+ */
 public class playScreenController<timer> {
 
+    /** The file 1. */
     //magnet icon
     @FXML
     File file1 = new File("src/resources/images/magnet.png");
+    
+    /** The mag. */
     Image mag = new Image(file1.toURI().toString());
+    
+    /** The file 2. */
     //destroy all blocks icon
     @FXML
     File file2 = new File("src/resources/images/bomb.png");
+    
+    /** The destroy. */
     Image destroy = new Image(file2.toURI().toString());
+    
+    /** The file 3. */
     //coin icon
     @FXML
     File file3 = new File("src/resources/images/diamond.png");
+    
+    /** The coin. */
     Image coin = new Image(file3.toURI().toString());
+    
+    /** The file 4. */
     //shield icon
     @FXML
     File file4 = new File("src/resources/images/magic-potion.png");
+    
+    /** The magic. */
     Image magic = new Image(file4.toURI().toString());
+    
+    /** The xs. */
     double[] xs = {2.5, 57.5, 112.5, 167.5, 222.5, 277.5};
 //    @FXML
+/** The snake length. */
 //    Label _snakeHead, _snakeHead1, _snakeHead11;
     @FXML
     private Text _snakeLength;
+    
+    /** The block pane. */
     @FXML
     private AnchorPane _blockPane;
+    
+    /** The game over. */
     @FXML
     private AnchorPane _gameOver;
+    
+    /** The current coins. */
     @FXML
     Text _currentCoins;
+    
+    /** The end score. */
     @FXML
     Label _endScore;
+    
+    /** The top score. */
     @FXML
     Label _topScore;
+    
+    /** The current score. */
     @FXML
     private  Text _currentScore;
+    
+    /** The magnet timer. */
     @FXML
     Text _magnetTimer;
+    
+    /** The shield timer. */
     @FXML
     Text _shieldTimer;
+    
+    /** The snake. */
     Snake _snake;
 
+    /** The paused. */
     static Boolean _paused;
 //    Label _wall1;
 //    Label _particle1;
+/** The blocks. */
 // ArrayList<Ball> _balls;
      static ArrayList<Block> _blocks;
+    
+    /** The coins. */
     static ArrayList<Coin> _coins;
+    
+    /** The destroys. */
     static ArrayList<DestroyAllBlocks> _destroys;
+    
+    /** The magnets. */
     static ArrayList<Magnet> _magnets;
+    
+    /** The shields. */
     static ArrayList<Shield> _shields;
+    
+    /** The walls. */
     static ArrayList<Wall> _walls;
+    
+    /**
+     * Key released.
+     *
+     * @param event the event
+     * @throws Exception the exception
+     */
     @FXML
     protected void keyReleased(KeyEvent event) throws Exception {
         if ((event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.A) && _snake.leftBoundaryCheck()) {
@@ -82,28 +142,58 @@ public class playScreenController<timer> {
         }
     }
 
+    /**
+     * Initialize.
+     */
     @FXML
     public void initialize() {
-        _paused = false;
-//        _balls=new ArrayList<Ball>();
-        _blocks = new ArrayList<Block>();
-        _coins = new ArrayList<Coin>();
-        _destroys = new ArrayList<DestroyAllBlocks>();
-        _magnets = new ArrayList<Magnet>();
-        _shields = new ArrayList<Shield>();
-        _walls = new ArrayList<Wall>();
-//        Wall _wall= new Wall();
-        _snake = new Snake(/*_snakeHead, _snakeHead1, _snakeHead11,*/ /*_balls, */_snakeLength, _blockPane);
-        _shieldTimer.setVisible(false);
-        _shieldTimer.setStyle("-fx-blend-mode: difference ");
-        _shieldTimer.setDisable(true);
-        _magnetTimer.setVisible(false);
-        _magnetTimer.setStyle("-fx-blend-mode: difference ");
-        _magnetTimer.setDisable(true);
-        _gameOver.setVisible(false);
-        _gameOver.setDisable(true);
-        _currentCoins.setText("0");
-        _currentScore.setText("0");
+        if (!Main.resumed) {
+            System.out.println("New Game");
+            _paused = false;
+            //        _balls=new ArrayList<Ball>();
+            _blocks = new ArrayList<Block>();
+            _coins = new ArrayList<Coin>();
+            _destroys = new ArrayList<DestroyAllBlocks>();
+            _magnets = new ArrayList<Magnet>();
+            _shields = new ArrayList<Shield>();
+            _walls = new ArrayList<Wall>();
+            //        Wall _wall= new Wall();
+            _snake = new Snake(/*_snakeHead, _snakeHead1, _snakeHead11,*/ /*_balls, */_snakeLength, _blockPane, "10");
+            _shieldTimer.setVisible(false);
+            _shieldTimer.setStyle("-fx-blend-mode: difference ");
+            _shieldTimer.setDisable(true);
+            _magnetTimer.setVisible(false);
+            _magnetTimer.setStyle("-fx-blend-mode: difference ");
+            _magnetTimer.setDisable(true);
+            _gameOver.setVisible(false);
+            _gameOver.setDisable(true);
+            _currentCoins.setText("0");
+            _currentScore.setText("0");
+        }
+        else {
+            System.out.println("Resume Game");
+            Main.resumed = false;
+            _paused = false;
+            _blocks = new ArrayList<Block>();
+            _coins = new ArrayList<Coin>();
+            _destroys = new ArrayList<DestroyAllBlocks>();
+            _magnets = new ArrayList<Magnet>();
+            _shields = new ArrayList<Shield>();
+            _walls = new ArrayList<Wall>();
+            _snake = new Snake(_snakeLength, _blockPane, Main._sg.snakeLength);
+            _shieldTimer.setVisible(false);
+            _shieldTimer.setStyle("-fx-blend-mode: difference ");
+            _shieldTimer.setDisable(true);
+            _magnetTimer.setVisible(false);
+            _magnetTimer.setStyle("-fx-blend-mode: difference ");
+            _magnetTimer.setDisable(true);
+            _gameOver.setVisible(false);
+            _gameOver.setDisable(true);
+            System.out.println(Main._sg.currentScore);
+            _currentCoins.setText(Main._sg.currentCoins);
+            _currentScore.setText(Main._sg.currentScore);
+
+        }
 
         if (!_paused) {
             AnimationTimer timerx1 = new AnimationTimer() {
@@ -243,13 +333,43 @@ public class playScreenController<timer> {
 //
 //    }
 
-    public void tapToStart(ActionEvent actionEvent) throws Exception {
+    /**
+ * Tap to start.
+ *
+ * @param actionEvent the action event
+ * @throws Exception the exception
+ */
+public void tapToStart(ActionEvent actionEvent) throws Exception {
         Scene s = new Scene(FXMLLoader.load(getClass().getResource("../resources/fxml/playscreen.fxml")), 320, 480);
         Main.mainStage.setScene(s);
     }
 
+    /**
+     * Back home.
+     *
+     * @param actionEvent the action event
+     * @throws Exception the exception
+     */
     public void backHome(ActionEvent actionEvent) throws Exception {
+        Main._sg.currentCoins = _currentCoins.getText();
+        Main._sg.currentScore = _currentScore.getText();
+        Main._sg.snakeLength = _snakeLength.getText();
+        Main.save();
         Scene s = new Scene(FXMLLoader.load(getClass().getResource("../resources/fxml/frontscreen.fxml")), 320, 480);
         Main.mainStage.setScene(s);
+    }
+
+    /**
+     * Save game.
+     *
+     * @param actionEvent the action event
+     * @throws Exception the exception
+     */
+    public void saveGame(ActionEvent actionEvent) throws Exception {
+        System.out.println("SAVING");
+        Main._sg.currentCoins = _currentCoins.getText();
+        Main._sg.currentScore = _currentScore.getText();
+        Main._sg.snakeLength = _snakeLength.getText();
+        Main.save();
     }
 }

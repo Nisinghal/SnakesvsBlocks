@@ -10,12 +10,32 @@ import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
+/**
+ * The Class DestroyAllBlocks.
+ */
 public class DestroyAllBlocks implements Token {
+    
+    /** The value. */
     int value;
+    
+    /** The frequency. */
     int frequency;
+    
+    /** The position. */
     int position;
+    
+    /** The destroy all. */
     ImageView _destroyAll;
 
+    /**
+     * Instantiates a new destroy all blocks.
+     *
+     * @param _destroys the destroys
+     * @param tok the tok
+     * @param xsi the xsi
+     * @param xs the xs
+     * @param _blockPane the block pane
+     */
     DestroyAllBlocks(ArrayList<DestroyAllBlocks> _destroys, Image tok, int xsi, double[] xs, AnchorPane _blockPane) {
         _destroyAll = new ImageView();
         _destroyAll.setImage(tok);
@@ -27,22 +47,37 @@ public class DestroyAllBlocks implements Token {
         _destroys.add(this);
     }
 
+    /* (non-Javadoc)
+     * @see game.Token#checkCollision(game.Snake)
+     */
     public boolean checkCollision(Snake _snake) {
         return (_snake._snakeHead.getLayoutX() >= _destroyAll.getLayoutX() && _snake._snakeHead.getLayoutX() <= _destroyAll.getLayoutX() + 52.5 && 240 <= _destroyAll.getLayoutY() && 310 >= _destroyAll.getLayoutY());
     }
 
+    /* (non-Javadoc)
+     * @see game.Token#getLayoutY()
+     */
     public double getLayoutY() {
         return _destroyAll.getLayoutY();
     }
 
+    /* (non-Javadoc)
+     * @see game.Token#disappear(javafx.scene.layout.AnchorPane)
+     */
     public void disappear(AnchorPane _blockPane) {
         _blockPane.getChildren().remove(_destroyAll);
     }
 
+    /* (non-Javadoc)
+     * @see game.Token#proceed()
+     */
     public void proceed() {
         _destroyAll.setLayoutY(_destroyAll.getLayoutY() + 3);
     }
 
+    /* (non-Javadoc)
+     * @see game.Token#collide(game.Snake, javafx.scene.layout.AnchorPane, javafx.scene.text.Text)
+     */
     public void collide(Snake _snake, AnchorPane _blockPane, Text _currentScore) {
         disappear(_blockPane);
        for (Block _block:playScreenController._blocks){

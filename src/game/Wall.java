@@ -40,20 +40,52 @@ import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
 
 
+/**
+ * The Class Wall.
+ */
 public class Wall {
+    
+    /** The random. */
     Random random = new Random();
+    
+    /** The initial steps. */
     double initialSteps = 100;//number of steps until removed
+    
+    /** The delta Y. */
     //    double deltaX;//change in x location per step
     double deltaY;//change in y location per step
+    
+    /** The particle. */
     //    @FXML
     Label _particle;
+    
+    /** The particles. */
     ArrayList<Label> _particles;
+    
+    /** The r. */
     Random r;
+    
+    /** The x. */
     double x;
+    
+    /** The xs. */
     double xs;
+    
+    /** The ys. */
     double ys;
+    
+    /** The y. */
     double y;
 
+    /**
+     * Instantiates a new wall.
+     *
+     * @param _blockPane the block pane
+     * @param X the x
+     * @param Y the y
+     * @param hex the hex
+     * @param hexcodes the hexcodes
+     */
     Wall(AnchorPane _blockPane, double X, double Y, int hex, String[] hexcodes) {
         r = new Random();
         _particles=new ArrayList<Label>();

@@ -8,11 +8,29 @@ import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
+/**
+ * The Class Shield.
+ */
 public class Shield implements Token {
+    
+    /** The value. */
     static int _value;
+    
+    /** The frequency. */
     int frequency;
+    
+    /** The shield. */
     ImageView _shield;
 
+/**
+ * Instantiates a new shield.
+ *
+ * @param _shields the shields
+ * @param tok the tok
+ * @param xsi the xsi
+ * @param xs the xs
+ * @param _blockPane the block pane
+ */
 Shield(ArrayList<Shield> _shields   , Image tok, int xsi, double[] xs, AnchorPane _blockPane) {
         _shield = new ImageView();
         _shield.setImage(tok);
@@ -25,22 +43,37 @@ Shield(ArrayList<Shield> _shields   , Image tok, int xsi, double[] xs, AnchorPan
 _shields.add(this);
     }
 
+    /* (non-Javadoc)
+     * @see game.Token#checkCollision(game.Snake)
+     */
     public boolean checkCollision(Snake _snake) {
         return (_snake._snakeHead.getLayoutX() >= _shield.getLayoutX() && _snake._snakeHead.getLayoutX() <= _shield.getLayoutX() + 52.5 && 240 <= _shield.getLayoutY() && 310 >= _shield.getLayoutY());
     }
 
+    /* (non-Javadoc)
+     * @see game.Token#disappear(javafx.scene.layout.AnchorPane)
+     */
     public void disappear(AnchorPane _blockPane) {
         _blockPane.getChildren().remove(_shield);
     }
 
+    /* (non-Javadoc)
+     * @see game.Token#proceed()
+     */
     public void proceed() {
         _shield.setLayoutY(_shield.getLayoutY() + 3);
     }
 
+    /* (non-Javadoc)
+     * @see game.Token#getLayoutY()
+     */
     public double getLayoutY() {
         return _shield.getLayoutY();
     }
 
+    /* (non-Javadoc)
+     * @see game.Token#collide(game.Snake, javafx.scene.layout.AnchorPane, javafx.scene.text.Text)
+     */
     public void collide(Snake _snake, AnchorPane _blockPane, Text _currentCoins) {
         disappear(_blockPane);
         _snake._shield = true;

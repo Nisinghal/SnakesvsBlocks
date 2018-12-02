@@ -9,12 +9,33 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import java.util.ArrayList;
+
+/**
+ * The Class Magnet.
+ */
 public class Magnet implements Token {
+    
+    /** The value. */
     static int _value;
+    
+    /** The frequency. */
     int frequency;
+    
+    /** The position. */
     int position;
+    
+    /** The magnet. */
     ImageView _magnet;
 
+    /**
+     * Instantiates a new magnet.
+     *
+     * @param _magnets the magnets
+     * @param tok the tok
+     * @param xsi the xsi
+     * @param xs the xs
+     * @param _blockPane the block pane
+     */
     Magnet(ArrayList<Magnet> _magnets,Image tok, int xsi, double[] xs, AnchorPane _blockPane) {
         _value = 0;
         _magnet = new ImageView();
@@ -27,22 +48,37 @@ public class Magnet implements Token {
         _magnets.add(this);
     }
 
+    /* (non-Javadoc)
+     * @see game.Token#checkCollision(game.Snake)
+     */
     public boolean checkCollision(Snake _snake) {
         return (_snake._snakeHead.getLayoutX() >= _magnet.getLayoutX() && _snake._snakeHead.getLayoutX() <= _magnet.getLayoutX() + 52.5 && 240 <= _magnet.getLayoutY() && 310 >= _magnet.getLayoutY());
     }
 
+    /* (non-Javadoc)
+     * @see game.Token#proceed()
+     */
     public void proceed() {
         _magnet.setLayoutY(_magnet.getLayoutY() + 3);
     }
 
+    /* (non-Javadoc)
+     * @see game.Token#disappear(javafx.scene.layout.AnchorPane)
+     */
     public void disappear(AnchorPane _blockPane) {
         _blockPane.getChildren().remove(_magnet);
     }
 
+    /* (non-Javadoc)
+     * @see game.Token#getLayoutY()
+     */
     public double getLayoutY() {
         return _magnet.getLayoutY();
     }
 
+    /* (non-Javadoc)
+     * @see game.Token#collide(game.Snake, javafx.scene.layout.AnchorPane, javafx.scene.text.Text)
+     */
     public void collide(Snake _snake, AnchorPane _blockPane, Text _text) {
         disappear(_blockPane);
         _snake._magnet = true;

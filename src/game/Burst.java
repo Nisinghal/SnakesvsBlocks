@@ -40,19 +40,44 @@ import java.util.Random;
 //provide random numbers for direction of particle
 
 
+/**
+ * The Class Burst.
+ */
 public class Burst {
+    
+    /** The random. */
     Random random = new Random();
+    
+    /** The initial steps. */
     double initialSteps = 100;//number of steps until removed
+    
+    /** The delta Y. */
     //    double deltaX;//change in x location per step
     double deltaY;//change in y location per step
+    
+    /** The particle. */
     //    @FXML
     Label _particle;
+    
+    /** The particles. */
     ArrayList<Label> _particles;
+    
+    /** The r. */
     Random r;
+    
+    /** The x. */
     double x;
+    
+    /** The xs. */
     double xs;
+    
+    /** The ys. */
     double ys;
+    
+    /** The y. */
     double y;
+    
+    /** The block pane. */
     //    Timer timer;
     AnchorPane _blockPane;
 
@@ -69,7 +94,16 @@ public class Burst {
 //    }
 
 
-    Burst(AnchorPane blockPane, double X, double Y, int hex, String[] hexcodes) {
+    /**
+ * Instantiates a new burst.
+ *
+ * @param blockPane the block pane
+ * @param X the x
+ * @param Y the y
+ * @param hex the hex
+ * @param hexcodes the hexcodes
+ */
+Burst(AnchorPane blockPane, double X, double Y, int hex, String[] hexcodes) {
         r = new Random();
         _particles = new ArrayList<Label>();
         AnimationTimer timer2 = new AnimationTimer() {
