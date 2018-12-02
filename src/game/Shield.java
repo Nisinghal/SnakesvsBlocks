@@ -6,12 +6,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
+import java.util.ArrayList;
+
 public class Shield implements Token {
     static int _value;
     int frequency;
     ImageView _shield;
 
-    Shield(Image tok, int xsi, double[] xs, AnchorPane _blockPane) {
+Shield(ArrayList<Shield> _shields   , Image tok, int xsi, double[] xs, AnchorPane _blockPane) {
         _shield = new ImageView();
         _shield.setImage(tok);
         _shield.setFitHeight(60);
@@ -20,7 +22,7 @@ public class Shield implements Token {
         _shield.setLayoutY(-52.5);
         _blockPane.getChildren().add(_shield);
         _value = 0;
-
+_shields.add(this);
     }
 
     public boolean checkCollision(Snake _snake) {

@@ -35,6 +35,9 @@
         <font>
             <Font name="Century Gothic" size="24.0" />
         </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
       </Button>
     <Button fx:id="_leaderboard" cacheShape="false" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" layoutY="401.0" mnemonicParsing="false" onAction="#goLeader" prefHeight="88.0" prefWidth="320.0" style="-fx-background-color: black;" text="Leaderboard" textFill="#f8f8f8" textOverrun="CENTER_ELLIPSIS">
         <font>
@@ -54,10 +57,13 @@
             <Font name="Century Gothic" size="29.0" />
         </font>
     </Text>
-         <Button fx:id="_resume" cacheShape="false" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" layoutY="321.0" maxWidth="320.0" minWidth="320.0" mnemonicParsing="false" onAction="#tapToStart" prefHeight="80.0" prefWidth="320.0" style="-fx-background-color: black;" text="Resume" textFill="#f8f8f8" textOverrun="CENTER_ELLIPSIS">
+         <Button fx:id="_resume" cacheShape="false" contentDisplay="TEXT_ONLY" disable="true" graphicTextGap="0.0" layoutY="321.0" maxWidth="320.0" minWidth="320.0" mnemonicParsing="false" onAction="#tapToStart" prefHeight="80.0" prefWidth="320.0" style="-fx-background-color: black;" text="Resume" textFill="#f8f8f8" textOverrun="CENTER_ELLIPSIS">
             <font>
                <Font name="Century Gothic" size="24.0" />
             </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
          </Button>
 </children>
 </AnchorPane>

@@ -15,13 +15,13 @@ public class Snake {
     Label _snakeHead/*, _snakeHead1, _snakeHead11*/;
     Text _snakeLength;
 
-    Snake(/*Label s1, Label s2, Label s3,*/ Text _sl, AnchorPane _blockPane) {
+Snake(/*Label s1, Label s2, Label s3, ArrayList<Ball> _balls,*/  Text _sl, AnchorPane _blockPane) {
         _shield = false;
         _snake = new ArrayList<Label>();
         _snakeTailY = 300;
         _snakeTailX = 120;
-        for(int i=0;i<10;i++){
-            Ball _new = new Ball(_blockPane);
+        for(int i=0;i<9;i++){
+            Ball _new = new Ball(/*_balls,*/ _blockPane);
             _new.setLayoutX(_snakeTailX);
             _new.setLayoutY(_snakeTailY);
             _new.extendSnake(this);
@@ -42,13 +42,16 @@ public class Snake {
 //        System.out.println("collide"+value);
 
         int sl = Integer.parseInt(_snakeLength.getText());
-        while (_snake.size() > (sl - value) && _snake.size() > 0) {
+        while (_snake.size() > (sl - value)  && _snake.size()>0) {
 //            System.out.println(_snake.size()+" "+_snakeLength.getText()+" "+ value);
-            _blockPane.getChildren().remove(_snake.get(_snake.size() - 1));
+           if (_snake.size() <= 9) {
+               _blockPane.getChildren().remove(_snake.get(_snake.size() - 1));
+               _snakeTailY=_snakeTailY-20;
+           }
 //            _snakeLength.setText(""+(Integer.parseInt(_snakeLength.getText())-1));
 //            value--;
             _snake.remove(_snake.size() - 1);
-            _snakeTailY=_snakeTailY-20;
+
         }
         _snakeLength.setText("" + (sl - value));
         sl = Integer.parseInt(_snakeLength.getText());
@@ -60,14 +63,17 @@ public class Snake {
 
     }
 
-    public void _incLength(int increment, AnchorPane _blockPane) {
+    public void _incLength(/*ArrayList<Ball> _balls,*/ int increment, AnchorPane _blockPane) {
         for(int i=0;i<increment;i++){
-            Ball _new = new Ball(_blockPane);
+            if(_snake.size()<9) {
+                Ball _new = new Ball(/*Ball._balls, */_blockPane);
+
 //            System.out.println(_snakeTailY+ " "+_snake.size()+" "+_snakeLength.getText());
-            _new.setLayoutX(_snakeTailX);
-            _new.setLayoutY(_snakeTailY);
-            _new.extendSnake(this);
-            _snakeTailY=_snakeTailY+20;
+                _new.setLayoutX(_snakeTailX);
+                _new.setLayoutY(_snakeTailY);
+                _new.extendSnake(this);
+                _snakeTailY = _snakeTailY + 20;
+            }
             _snakeLength.setText(""+(Integer.parseInt(_snakeLength.getText())+1));
         }
     }

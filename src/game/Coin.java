@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-
+import java.util.ArrayList;
 public class Coin implements Token {
     int value;
     int frequency;
@@ -12,7 +12,7 @@ public class Coin implements Token {
     static Image _coinImage;
     static Text _currentCoins;
 
-    Coin(Image tok, int xsi, double[] xs, AnchorPane _blockPane, Text _cc) {
+    Coin(ArrayList<Coin> _coins, Image tok, int xsi, double[] xs, AnchorPane _blockPane, Text _cc) {
         _coin = new ImageView();
         _coin.setImage(tok);
         _coinImage=_coin.getImage();
@@ -22,6 +22,7 @@ public class Coin implements Token {
         _coin.setLayoutY(-52.5);
         _blockPane.getChildren().add(_coin);
         _currentCoins=_cc;
+        _coins.add(this);
     }
 
     public boolean checkCollision(Snake _snake) {

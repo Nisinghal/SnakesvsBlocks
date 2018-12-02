@@ -1,12 +1,14 @@
 package game;
 
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
+
+import java.util.ArrayList;
 
 public class DestroyAllBlocks implements Token {
     int value;
@@ -14,7 +16,7 @@ public class DestroyAllBlocks implements Token {
     int position;
     ImageView _destroyAll;
 
-    DestroyAllBlocks(Image tok, int xsi, double[] xs, AnchorPane _blockPane) {
+    DestroyAllBlocks(ArrayList<DestroyAllBlocks> _destroys, Image tok, int xsi, double[] xs, AnchorPane _blockPane) {
         _destroyAll = new ImageView();
         _destroyAll.setImage(tok);
         _destroyAll.setFitHeight(60);
@@ -22,7 +24,7 @@ public class DestroyAllBlocks implements Token {
         _destroyAll.setLayoutX(xs[xsi]);
         _destroyAll.setLayoutY(-52.5);
         _blockPane.getChildren().add(_destroyAll);
-
+        _destroys.add(this);
     }
 
     public boolean checkCollision(Snake _snake) {
@@ -41,24 +43,43 @@ public class DestroyAllBlocks implements Token {
         _destroyAll.setLayoutY(_destroyAll.getLayoutY() + 3);
     }
 
-    public void collide(Snake _snake, AnchorPane _blockPane, Text _currentCoins) {
+    public void collide(Snake _snake, AnchorPane _blockPane, Text _currentScore) {
         disappear(_blockPane);
+       for (Block _block:playScreenController._blocks){
+           if(_block._block.getLayoutY()<400) {
+               _block._block.setDisable(true);
+               System.out.println(_block._value);
+               _block.collide(_blockPane, _snake, _currentScore);
+           }
 //        System.out.println(_blockPane.getChildren().size());
-        ObservableList<Node> nodes = _blockPane.getChildren();
-        for (int i = 0; i < nodes.size(); i++) {
-            if (nodes.get(i).getClass().toString().equals("class javafx.scene.control.Label")) {
-                Label _node= (Label) nodes.get(i);
-//                System.out.println(_node.getStyle());
-                String[] _nodecss = _node.getStyle().split("; ");
-            if (_nodecss[1].equals("-fx-background-radius: 4px")) {
-//                System.out.println("Removed"+_node.getText());
-                _currentCoins.setText("" + (Integer.parseInt(_currentCoins.getText()) + Integer.parseInt(_node.getText())));
-                _blockPane.getChildren().remove(nodes.get(i));
-            }
-            }
+//        ObservableList<Node> nodes = _blockPane.getChildren();
+//        System.out.println("start");
+//        for (int i = 0; i < nodes.size(); i++) {
+
+//            System.out.println(nodes.get(i).getClass());
+//            if (nodes.get(i).getClass().toString().equals("class javafx.scene.control.Label")) {
+//
+//                Label _node = (Label) nodes.get(i);
+//                System.out.println(_node.getText());
+//                String[] _nodecss = _node.getStyle().split("; ");
+//                if (_nodecss[1].equals("-fx-background-radius: 4px") && _node.getLayoutY() <= 420) {
+//                    _n
+//                    System.out.println(_node.getText()+" del");
+////                System.out.println("Removed"+_node.getText());
+//                    _currentCoins.setText("" + (Integer.parseInt(_currentCoins.getText()) + Integer.parseInt(_node.getText())));
+//
+////                Burst _burst=new Burst(_blockPane, nodes.get(i).getLayoutX(),nodes.get(i).getLayoutY(), Block.hex, Block.hexcodes);
+//                    nodes.get(i).setVisible(false);
+//                    _node.setDisable(true);
+//                    _blockPane.getChildren().remove(_node);
+//
+////                Burst _burst = new
+////
+//                }
+//            }
         }
-    nodes =null;
-}
+//        nodes = null;
+    }
 }
 
 

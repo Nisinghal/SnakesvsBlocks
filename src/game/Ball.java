@@ -1,27 +1,30 @@
-package game;
+ package game;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Ball implements Token {
     Label _ball;
     int _value;
+    static ArrayList<Ball> _balls=new ArrayList<game.Ball>();
 //    int frequency;
 
-    Ball(AnchorPane _blockPane) {
+    Ball(/*ArrayList<Ball> _balls,*/ AnchorPane _blockPane) {
         _ball = new Label();
         _ball.setStyle("-fx-background-color: WHITE; -fx-background-radius: 20px; -fx-border-color: BLACK; -fx-border-width: 2px; -fx-border-radius: 20px");
         _ball.setMinSize(20, 20);
         _ball.setMaxSize(20, 20);
         _ball.setPrefSize(20, 20);
         _blockPane.getChildren().add(_ball);
+        _balls.add(this);
+//        this._balls=_balls;
     }
 
-    Ball(Random rand, int xsi, double[] xs, AnchorPane _blockPane) {
+    Ball(/*ArrayList<Ball> _balls, */Random rand, int xsi, double[] xs, AnchorPane _blockPane) {
         _value = rand.nextInt(15) + 1;
         _ball = new Label();
         _ball.setTextAlignment(TextAlignment.CENTER);
@@ -33,6 +36,8 @@ public class Ball implements Token {
         _ball.setLayoutX(xs[xsi]);
         _ball.setLayoutY(-52.5);
         _blockPane.getChildren().add(_ball);
+        _balls.add(this);
+        this._balls=_balls;
     }
 
     public void disappear(AnchorPane _blockPane) {
@@ -63,12 +68,12 @@ public class Ball implements Token {
         _snake.extendSnake(_ball);
     }
 
-    public void collide(Snake _snake, AnchorPane _blockPane, Text _currentCoins) {
+    public void collide( Snake _snake, AnchorPane _blockPane, Text _currentCoins) {
         if(_snake.checkMagnetOn()) System.out.println("MAGNETTball");
 //        Random rand = new Random();
         int sl = Integer.parseInt(_snake._snakeLength.getText());
         disappear(_blockPane);
-        _snake._incLength(_value, _blockPane);
+        _snake._incLength(/*_balls,*/_value, _blockPane);
 ////        _ball.setLayoutX(_snake._snakeTailX);
 ////        _ball.setLayoutY(_snake._snakeTailY);
 //        _snake._snakeLength.setText("" + (sl + _value));

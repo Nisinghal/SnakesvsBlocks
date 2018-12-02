@@ -8,14 +8,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-
+import java.util.ArrayList;
 public class Magnet implements Token {
     static int _value;
     int frequency;
     int position;
     ImageView _magnet;
 
-    Magnet(Image tok, int xsi, double[] xs, AnchorPane _blockPane) {
+    Magnet(ArrayList<Magnet> _magnets,Image tok, int xsi, double[] xs, AnchorPane _blockPane) {
         _value = 0;
         _magnet = new ImageView();
         _magnet.setImage(tok);
@@ -24,6 +24,7 @@ public class Magnet implements Token {
         _magnet.setLayoutX(xs[xsi]);
         _magnet.setLayoutY(-52.5);
         _blockPane.getChildren().add(_magnet);
+        _magnets.add(this);
     }
 
     public boolean checkCollision(Snake _snake) {
@@ -61,6 +62,8 @@ public class Magnet implements Token {
                         if (nodes.get(i).getClass().toString().equals("class javafx.scene.control.Label")) {
                             Label _node= (Label) nodes.get(i);
                             String[] _nodecss = _node.getStyle().split("; ");
+//                            System.out.println(_nodecss.length);
+//                            if(_nodecss.length==1)System.out.println(_nodecss[1]);
                             if (_nodecss[1].equals("-fx-background-radius: 20px") && _nodecss[4].equals("-fx-border-radius: 20px")==false) {
 //                                _node.collide(_snake, _blockPane, _currentCoins);
                                 System.out.println("ballremoved");

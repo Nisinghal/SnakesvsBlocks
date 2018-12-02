@@ -1,6 +1,8 @@
 package game;
 
 import javafx.animation.AnimationTimer;
+import javafx.animation.PauseTransition;
+import javafx.animation.SequentialTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -59,6 +62,16 @@ public class playScreenController<timer> {
     Text _shieldTimer;
     Snake _snake;
 
+    static Boolean _paused;
+//    Label _wall1;
+//    Label _particle1;
+// ArrayList<Ball> _balls;
+     static ArrayList<Block> _blocks;
+    static ArrayList<Coin> _coins;
+    static ArrayList<DestroyAllBlocks> _destroys;
+    static ArrayList<Magnet> _magnets;
+    static ArrayList<Shield> _shields;
+    static ArrayList<Wall> _walls;
     @FXML
     protected void keyReleased(KeyEvent event) throws Exception {
         if ((event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.A) && _snake.leftBoundaryCheck()) {
@@ -71,7 +84,16 @@ public class playScreenController<timer> {
 
     @FXML
     public void initialize() {
-        _snake = new Snake(/*_snakeHead, _snakeHead1, _snakeHead11,*/ _snakeLength, _blockPane);
+        _paused = false;
+//        _balls=new ArrayList<Ball>();
+        _blocks = new ArrayList<Block>();
+        _coins = new ArrayList<Coin>();
+        _destroys = new ArrayList<DestroyAllBlocks>();
+        _magnets = new ArrayList<Magnet>();
+        _shields = new ArrayList<Shield>();
+        _walls = new ArrayList<Wall>();
+//        Wall _wall= new Wall();
+        _snake = new Snake(/*_snakeHead, _snakeHead1, _snakeHead11,*/ /*_balls, */_snakeLength, _blockPane);
         _shieldTimer.setVisible(false);
         _shieldTimer.setStyle("-fx-blend-mode: difference ");
         _shieldTimer.setDisable(true);
@@ -83,51 +105,63 @@ public class playScreenController<timer> {
         _currentCoins.setText("0");
         _currentScore.setText("0");
 
-        AnimationTimer timerx1 = new AnimationTimer() {
-            private long lastUpdate = 0;
-            @Override
-            public void handle(long now) {
-                if (now - lastUpdate >= 1500_000_000) {
-                    for (int xsi = 0; xsi < 6; xsi++) {
-                        Random rand = new Random();
-                        if (rand.nextInt(100) < 50) {
-                            int xxxx = rand.nextInt(50) + 1;
-                            if (rand.nextInt(100) < 70) {
-                                xxxx = rand.nextInt(Integer.parseInt(_snakeLength.getText())) + 1;
-                            }
-                            int value = xxxx;
-                            lastUpdate = now;
-                            Block _block = new Block(_blockPane, value, xs, xsi);
-                            AnimationTimer timer2 = new AnimationTimer() {
-                                private long lastUpdate2 = 0;
-                                @Override
-                                public void handle(long now2) {
-                                    if (now2 - lastUpdate2 >= 8_000_000) {
-                                        lastUpdate2 = now2;
-                                        _block.proceed();
-                                        if (_block.checkCollision(_snake)) {
-                                            if(_snake.checkShieldOff()) _snake._decLength(_block, value, _blockPane);
-                                            _currentScore.setText("" + (Integer.parseInt(_currentScore.getText()) + value));
-                                            _blockPane.getChildren().remove(_block._block);
-                                            this.stop();
-                                        }
-                                        if (_block._block.getLayoutY() > 480) {
-                                            this.stop();
+        if (!_paused) {
+            AnimationTimer timerx1 = new AnimationTimer() {
+                private long lastUpdate = 0;
+
+                @Override
+                public void handle(long now) {
+                    if (now - lastUpdate >= 1500_000_000) {
+                        for (int xsi = 0; xsi < 6; xsi++) {
+                            Random rand = new Random();
+                            if (rand.nextInt(100) < 50) {
+                                int xxxx = rand.nextInt(50) + 1;
+                                if (rand.nextInt(100) < 70) {
+                                    if (Integer.parseInt(_snakeLength.getText()) < 50)
+                                        xxxx = rand.nextInt(Integer.parseInt(_snakeLength.getText())) + 1;
+                                }
+                                int value = xxxx;
+                                lastUpdate = now;
+                                Block _block = new Block(_blocks, _blockPane, value, xs, xsi);
+                                AnimationTimer timer2 = new AnimationTimer() {
+                                    private long lastUpdate2 = 0;
+
+                                    @Override
+                                    public void handle(long now2) {
+                                        try {
+                                            if (now2 - lastUpdate2 >= 8_000_000) {
+                                                lastUpdate2 = now2;
+                                                _block.proceed();
+                                                if (_block.checkCollision(_snake)) {
+                                                    _block.collide(_blockPane, _snake, _currentScore, _blocks);
+                                                    if (_block._value > 5) {
+                                                        SequentialTransition seqTransition = new SequentialTransition(new PauseTransition(Duration.millis(_block._value * 4000)));// wait a second);
+                                                    }
+                                                    this.stop();
+                                                }
+                                                if (_block._block.getLayoutY() > 480) {
+                                                    this.stop();
+                                                }
+                                            }
+                                        } catch (Exception InterruptedException) {
+//                                        this.stop();
                                         }
                                     }
-                                }
-                            };
-                            timer2.start();
+                                };
+                                timer2.start();
+                            }
                         }
                     }
                 }
-            }
-        };
-        timerx1.start();
+            };
+            timerx1.start();
+        }
+
 
 
         AnimationTimer timerx2 = new AnimationTimer() {
             private long lastUpdate = 0;
+
             @Override
             public void handle(long now) {
                 Random rand = new Random();
@@ -136,15 +170,15 @@ public class playScreenController<timer> {
                     int tokeno = rand.nextInt(5);
                     if (rand.nextInt(100) < 5) {
                         lastUpdate = now;
-                        Token _token ;
-                        if(_snake.checkMagnetOn() && tokeno==1) tokeno=0;
-                        if(!_snake.checkShieldOff() && tokeno==4) tokeno=0;
-                        final int no=tokeno;
-                        if (tokeno == 1) _token= new Magnet( mag, xsi, xs, _blockPane);
-                        else if (tokeno == 2) _token = new DestroyAllBlocks(destroy, xsi, xs, _blockPane);
-                        else if (tokeno == 3) _token= new Coin(coin, xsi, xs, _blockPane, _currentCoins);
-                        else if (tokeno == 4) _token = new Shield(magic, xsi, xs, _blockPane);
-                        else  _token = new Ball(rand, xsi, xs, _blockPane);
+                        Token _token;
+                        if (_snake.checkMagnetOn() && tokeno == 1) tokeno = 0;
+                        if (!_snake.checkShieldOff() && tokeno == 4) tokeno = 0;
+                        final int no = tokeno;
+                        if (tokeno == 1) _token = new Magnet(_magnets, mag, xsi, xs, _blockPane);
+                        else if (tokeno == 2) _token = new DestroyAllBlocks(_destroys, destroy, xsi, xs, _blockPane);
+                        else if (tokeno == 3) _token = new Coin(_coins, coin, xsi, xs, _blockPane, _currentCoins);
+                        else if (tokeno == 4) _token = new Shield(_shields, magic, xsi, xs, _blockPane);
+                        else _token = new Ball(/*_balls,*/ rand, xsi, xs, _blockPane);
 
                         AnimationTimer timer2 = new AnimationTimer() {
                             private long lastUpdate2 = 0;
@@ -155,10 +189,10 @@ public class playScreenController<timer> {
                                     lastUpdate2 = now2;
                                     _token.proceed();
                                     if (_token.checkCollision(_snake)) {
-                                       if(no==3) _token.collide(_snake, _blockPane, _currentCoins);
-                                       else if(no==1) _token.collide(_snake, _blockPane, _magnetTimer);
-                                       else if (no==2) _token.collide(_snake,_blockPane, _currentScore);
-                                       else _token.collide(_snake, _blockPane, _shieldTimer);
+                                        if (no == 3) _token.collide(_snake, _blockPane, _currentCoins);
+                                        else if (no == 1) _token.collide(_snake, _blockPane, _magnetTimer);
+                                        else if (no == 2) _token.collide(_snake, _blockPane, _currentScore);
+                                        else _token.collide(_snake, _blockPane, _shieldTimer);
                                         this.stop();
                                     }
                                     if (_token.getLayoutY() > 480) {
@@ -174,6 +208,7 @@ public class playScreenController<timer> {
         };
         timerx2.start();
     }
+
 
 //    public void spawnToken(int tokeno, Image tok, int xsi) {
 //        ImageView _token = new ImageView();
